@@ -40,17 +40,13 @@ int main() {
                            {"four", 4},  {"five", 5},  {"six", 6},
                            {"seven", 7}, {"eight", 8}, {"nine", 9}};
   size_t lut_size = sizeof(lut) / sizeof(lut[0]);
-
   int first = -1;
   int last = -1;
   int digit = 0;
-  int n_line = 1;
   bool found_on_line = false;
 
   while (fgets(line, MAX_LENGTH, fp) != NULL) {
-    printf("Line %d: %s", n_line++, line);
     replace_word_w_digit(line, lut, lut_size);
-    printf("%s\n", line);
     int i = 0;
     while (line[i] != '\0') {
       if (isdigit(line[i])) {
@@ -62,14 +58,12 @@ int main() {
       }
       i++;
     }
-    printf("%d\n", 10 * first + last);
     if (found_on_line) {
       digit += 10 * first + last;
     }
     first = -1;
     found_on_line = false;
   }
-
   fclose(fp);
   printf("\nSum = %d", digit);
 }
